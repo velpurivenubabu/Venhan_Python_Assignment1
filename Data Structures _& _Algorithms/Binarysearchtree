@@ -1,0 +1,91 @@
+class TreeNode:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        self.root = self._insert_recursive(self.root, key)
+    
+    def _insert_recursive(self, root, key):
+        if root is None:
+            return TreeNode(key)
+        
+        if key < root.key:
+            root.left = self._insert_recursive(root.left, key)
+        elif key > root.key:
+            root.right = self._insert_recursive(root.right, key)
+        
+        return root
+    
+    def find(self, key):
+        return self._find_recursive(self.root, key)
+    
+    def _find_recursive(self, root, key):
+        if root is None:
+            return False
+        if key == root.key:
+            return True
+        elif key < root.key:
+            return self._find_recursive(root.left, key)
+        else:
+            return self._find_recursive(root.right, key)
+    
+    def delete(self, key):
+        self.root = self._delete_recursive(self.root, key)
+    
+    def _delete_recursive(self, root, key):
+        if root is None:
+            return root
+        
+        if key < root.key:
+            root.left = self._delete_recursive(root.left, key)
+        elif key > root.key:
+            root.right = self._delete_recursive(root.right, key)
+        else:
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            
+            min_node = self._find_min(root.right)
+            root.key = min_node.key
+            root.right = self._delete_recursive(root.right, min_node.key)
+        
+        return root
+    def _find_min(self, node):
+        while node.left is not None:
+            node = node.left
+        return node
+    
+    def height(self):
+        return self._height_recursive(self.root)
+    
+    def _height_recursive(self, root):
+        if root is None:
+            return 0
+        else:
+            left_height = self._height_recursive(root.left)
+            right_height = self._height_recursive(root.right)
+            return max(left_height, right_height) + 1
+# inputs :
+bst = BST()
+bst.insert(9)
+bst.insert(7)
+bst.insert(6)
+bst.insert(5)
+bst.insert(3)
+bst.insert(2)
+bst.insert(8)
+
+
+print("Height of the tree:", bst.height())
+print("Is 4 present in the tree?", bst.find(4))
+print("Is 10 present in the tree?", bst.find(10))
+
+bst.delete(3)
+print("Height of the tree after deleting node with key 3:", bst.height())
