@@ -26,7 +26,7 @@ def merge(first_half, second_half):
     merged.extend( second_half[right_index:])
     
     return merged
-
+print("Enter list of Numbers supperated by coma(,)")
 arr = list(map(int,input().split(",")))
 sorted_arr = merge_sort(arr)
 print(sorted_arr)

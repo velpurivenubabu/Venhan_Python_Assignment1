@@ -19,7 +19,7 @@ def partition(arr, low, high):
         if arr[j] <= pivot:
             i += 1
             arr[i], arr[j] = arr[j], arr[i]
-    arr[i + 1], arr[high] = arr[high1,6,2,4,3], arr[i + 1]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
     return i + 1
 
 print("Enter numbers supprate with coma(,)")

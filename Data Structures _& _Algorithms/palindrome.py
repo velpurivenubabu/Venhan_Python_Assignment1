@@ -9,5 +9,3 @@ def is_palindrome(s: str) -> bool:
 print("Enter The String")
 string=input()
 print( is_palindrome(string))
-
-
